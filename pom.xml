@@ -98,6 +98,15 @@
              <version>3.0.0-beta4</version>
         </dependency> 
         
+        
+
+	<dependency>
+	    <groupId>com.github.efabiancj</groupId>
+	    <artifactId>ProtPanelHost</artifactId>
+	    <version>-SNAPSHOT</version>
+	</dependency>
+
+
     </dependencies>
 
     <build>
@@ -168,7 +177,12 @@
 	    <url>scp://138.68.13.48:8080/var/maven/repository</url>
 	</repository>-->
    
-                
+        <repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+	</repository>   
+        
+                  
         <repository>
             <id>unknown-jars-temp-repo</id>
             <name>A temporary repository created by NetBeans for libraries and jars it could not identify. Please replace the dependencies in this repository with correct ones and delete this repository.</name>
