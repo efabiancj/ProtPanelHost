@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 02/10/2016 21:23:22 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="logica.clases.Aplicacion" table="aplicacion" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="foreign">
+                <param name="property">usuario</param>
+            </generator>
+        </id>
+        <many-to-one name="dominio" class="logica.clases.Dominio" fetch="select">
+            <column name="dominio" />
+        </many-to-one>
+        <one-to-one name="usuario" class="logica.clases.Usuario" constrained="true"></one-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="20" />
+        </property>
+        <property name="usuario_1" type="java.lang.Integer">
+            <column name="usuario" />
+        </property>
+        <property name="directorio" type="string">
+            <column name="directorio" length="250" />
+        </property>
+        <property name="archivoWar" type="string">
+            <column name="archivo_war" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

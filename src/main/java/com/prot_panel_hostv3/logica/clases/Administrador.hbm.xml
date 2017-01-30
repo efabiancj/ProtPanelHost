@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 02/10/2016 21:23:22 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="logica.clases.Administrador" table="administrador" schema="public" optimistic-lock="version">
+        <id name="codigo" type="string">
+            <column name="codigo" length="10" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="grupo" class="logica.clases.Grupo" fetch="select">
+            <column name="grupo" />
+        </many-to-one>
+        <property name="nombres" type="string">
+            <column name="nombres" length="30" />
+        </property>
+        <property name="apellidos" type="string">
+            <column name="apellidos" length="30" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="50" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="10" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="200" />
+        </property>
+        <property name="clave" type="string">
+            <column name="clave" length="20" />
+        </property>
+    </class>
+</hibernate-mapping>

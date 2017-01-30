@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="index_usuario.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:define name="paginas">
+        <f:view contentType="text/html">
+       <h:form id="form_dominioss"  >
+            <p:dataTable var="vardominios" value="#{cDominios.dominioses}" 
+                         rowKey="#{vardominios.codigo}" 
+                      paginator="true" rows="10"
+                      selection="#{cDominios.selectedDominios}" 
+                      selectionMode="single" id="tablaEstudiantes"
+                                            >
+            <!--<p:ajax event="rowSelect" update=":form_dominioss:pnlGridDominios" oncomplete="dialogDominios.show()" /> -->
+           
+            
+            <p:column headerText="Codigo" sortBy="#{vardominios.codigo}" id="id">
+                #{vardominios.codigo}"
+            </p:column>
+            
+            <p:column headerText="Descripcion" sortBy="#{vardominios.descripcion}" id="descripcion">
+                #{vardominios.descripcion}
+            </p:column>
+             
+                        
+            <p:column headerText="Marca" sortBy="#{vardominios.id_marca.descripcion}" id="marca">
+                #{vardominios.id_marca.descripcion}
+            </p:column>
+            
+                         
+            <f:facet name="footer" >
+                <!--<p:commandButton value="nuevo" id="btnNuevo" onclick = "dialogDominios.show();" />-->
+                <p:commandButton value="Nuevo" id="btnNuevo" update=":form_dominioss:pnlGridDominios" 
+                                 oncomplete="dialogDominios.show()" />
+                                
+            </f:facet>
+        </p:dataTable>
+            
+        <p:dialog header="Detalles dominios" widgetVar="dialogDominios" resizable="false"
+                      width="400" showEffect="explode" hideEffect="explode">
+            
+                 <h:panelGrid id="pnlGridDominios" columns="2" cellpadding="4">  
+                    <h:outputText value="ID" />
+                    <h:inputText value="#{cDominios.codigo}" />
+                    
+                    <h:outputText value="Descripcion" />
+                    <h:inputText value="#{cDominios.dominios.descripcion}" />
+                    
+                    
+                    <h:outputText value="marca" />
+                    <h:selectOneMenu id="marc1" value="#{cDominios.marcset}" required="true">  
+                        <f:selectItem itemLabel="Escoja" itemValue="" />  
+                        <f:selectItems value="#{cDominios.lstmarc}" 
+                                       var="marc" itemLabel="#{marc.descripcion}" 
+                                       itemValue ="#{marc.id_marca}"/>  
+                    </h:selectOneMenu> 
+                    
+                </h:panelGrid>
+                <p:commandButton value="Ingresar" id="btnAceptar" action="#{cDominios.insertar}" update=":form_dominioss:tablaEstudiantes" onclick="dialogDominios.hide();"   />
+                <p:commandButton value="Cancelar" id="btnCancelar" onclick="dialogDominios.hide();" />
+        </p:dialog>
+            
+             
+        </h:form>
+</f:view>
+    </ui:define>    
+</ui:composition>

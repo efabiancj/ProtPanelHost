@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="index_usuario.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:define name="paginas">
+        <f:view contentType="text/html">
+       <h:form id="form_basedatoss"  >
+            <p:dataTable var="varbasedatos" value="#{cBasedatos.basedatoses}" 
+                         rowKey="#{varbasedatos.codigo}" 
+                      paginator="true" rows="10"
+                      selection="#{cBasedatos.selectedBasedatos}" 
+                      selectionMode="single" id="tablaEstudiantes"
+                                            >
+            <!--<p:ajax event="rowSelect" update=":form_basedatoss:pnlGridBasedatos" oncomplete="dialogBasedatos.show()" /> -->
+           
+            
+            <p:column headerText="Codigo" sortBy="#{varbasedatos.codigo}" id="id">
+                #{varbasedatos.codigo}"
+            </p:column>
+            
+            <p:column headerText="Descripcion" sortBy="#{varbasedatos.descripcion}" id="descripcion">
+                #{varbasedatos.descripcion}
+            </p:column>
+             
+                        
+            <p:column headerText="Marca" sortBy="#{varbasedatos.id_marca.descripcion}" id="marca">
+                #{varbasedatos.id_marca.descripcion}
+            </p:column>
+            
+                         
+            <f:facet name="footer" >
+                <!--<p:commandButton value="nuevo" id="btnNuevo" onclick = "dialogBasedatos.show();" />-->
+                <p:commandButton value="Nuevo" id="btnNuevo" update=":form_basedatoss:pnlGridBasedatos" 
+                                 oncomplete="dialogBasedatos.show()" />
+                                
+            </f:facet>
+        </p:dataTable>
+            
+        <p:dialog header="Detalles basedatos" widgetVar="dialogBasedatos" resizable="false"
+                      width="400" showEffect="explode" hideEffect="explode">
+            
+                 <h:panelGrid id="pnlGridBasedatos" columns="2" cellpadding="4">  
+                    <h:outputText value="ID" />
+                    <h:inputText value="#{cBasedatos.codigo}" />
+                    
+                    <h:outputText value="Descripcion" />
+                    <h:inputText value="#{cBasedatos.basedatos.descripcion}" />
+                    
+                    
+                    <h:outputText value="marca" />
+                    <h:selectOneMenu id="marc1" value="#{cBasedatos.marcset}" required="true">  
+                        <f:selectItem itemLabel="Escoja" itemValue="" />  
+                        <f:selectItems value="#{cBasedatos.lstmarc}" 
+                                       var="marc" itemLabel="#{marc.descripcion}" 
+                                       itemValue ="#{marc.id_marca}"/>  
+                    </h:selectOneMenu> 
+                    
+                </h:panelGrid>
+                <p:commandButton value="Ingresar" id="btnAceptar" action="#{cBasedatos.insertar}" update=":form_basedatoss:tablaEstudiantes" onclick="dialogBasedatos.hide();"   />
+                <p:commandButton value="Cancelar" id="btnCancelar" onclick="dialogBasedatos.hide();" />
+        </p:dialog>
+            
+             
+        </h:form>
+</f:view>
+    </ui:define>    
+</ui:composition>

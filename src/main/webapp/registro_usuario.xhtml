@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="index_usuario.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:define name="paginas">
+        <f:view contentType="text/html">
+       <h:form id="formId">
+                <table  class="table_registro">
+                    <tr>                    
+                        <td >
+                            <h:outputText styleClass="output_text" id="lblLogin" value="Login: " class="labels"> </h:outputText>
+                        </td>
+                        <td>
+                            <h:inputText styleClass="txtCedula" id="txtLogin"  onblur="validar_cedula('formId:txtCedula');" value="#{cUsuario.cedula}" > </h:inputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                            <h:outputText id="lblNombre" value="Nombre: " class="labels"> </h:outputText>
+                        </td>
+                        <td>
+                            <h:inputText styleClass="txtNombre" id="txtNombre" onblur="validar_solo_letras('formId:txtNombre');"  value="#{cUsuario.nombre}"> </h:inputText>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td >
+                            <h:outputText id="lblApellido" value="Apellido: " class="labels"> </h:outputText>
+                        </td>
+                        <td>
+                            <h:inputText styleClass="txtApellido" id="txtApellido" onblur="validar_solo_letras('formId:txtApellido');"  value="#{cUsuario.apellido}"> </h:inputText>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td >
+                            <h:outputText id="lblTelefono" value="Teléfono: " class="labels"> </h:outputText>
+                        </td>
+                        <td>
+                            <h:inputText styleClass="txtTelefono" id="txtTelefono" onblur="validar_solo_numeros('formId:txtTelefono');"  value="#{cUsuario.telefono}"> </h:inputText>
+                        </td>
+                    </tr>
+               
+                    <tr>
+                        <td>
+                            <h:outputText value="Contraseña:"/></td><td>
+                            <p:password id="password" onblur="validar_contrasena_segura('formId:password');" value="#{cUsuario.clave}" /></td><td>
+                            <p:message for="password"/></td></tr>
+
+                    <tr><td>
+                            <h:outputText value="Repita Contraseña:"/></td><td>
+                            <p:password id="repetirPassword" onblur="validar_repetir_contrasena('formId:password','formId:repetirPassword');"
+
+                                        >
+                                <p:message for="repetirPassword"/>
+                            </p:password></td>
+                    </tr>
+
+                    <tr>
+                        <td >
+                            <h:outputText id="lblEmail" value="Email: " class="labels"> </h:outputText>
+                        </td>
+                        <td>
+                            <h:inputText  id="txtEmail" onblur="validar_email('formId:txtEmail')" value="#{cUsuario.email}"> </h:inputText>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td >
+                            <h:outputText id="lblFecha_nac" value="Fecha nacimiento: " class="labels"> </h:outputText>
+                        </td> 
+                        <td>
+                            <!--<h:inputText id="txtFecha_nac"  onblur="validar_fecha2('formId:txtFecha_nac')" class="textBox" value="#{cUsuario.fecha_nac}"> </h:inputText>-->
+                            
+                            <h:selectOneMenu id="txtYear"  value="#{cUsuario.year}">
+                                <f:selectItem itemLabel="YYYY" itemValue="" />  
+                                <f:selectItems value="#{cUsuario.years}" />  
+                            </h:selectOneMenu> 
+                            <h:outputText  value=" / " class="labels"> </h:outputText>
+                            <h:selectOneMenu id="txtMonth"  value="#{cUsuario.month}">
+                                <f:selectItem itemLabel="MM" itemValue="" />  
+                                <f:selectItems value="#{cUsuario.months}" />  
+                            </h:selectOneMenu> 
+                            <h:outputText  value=" / " class="labels"> </h:outputText>
+                            <h:selectOneMenu id="txtDay"  value="#{cUsuario.day}">
+                                <f:selectItem itemLabel="dd" itemValue="" />  
+                                <f:selectItems value="#{cUsuario.days}" />  
+                            </h:selectOneMenu> 
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td >
+                            <h:commandButton id="btnRegistrar"  value="Registrar" styleClass="boton1"  action="#{cUsuario.ingresar_socio}"  > 
+                            </h:commandButton>
+                        </td>
+                        
+                    </tr>
+
+                </table>
+               
+            </h:form>
+</f:view>
+    </ui:define>    
+</ui:composition>
